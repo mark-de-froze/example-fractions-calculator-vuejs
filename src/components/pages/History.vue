@@ -38,7 +38,10 @@ import {mapGetters, mapState} from 'vuex'
 export default {
   name: 'HistoryPage',
   filters: {
-    toFraction: value => new Fraction(value).toFraction()
+    toFraction: value => {
+      const fraction = new Fraction(value).toFraction()
+      return fraction
+    }
   },
   computed: {
     ...mapGetters(['history']),

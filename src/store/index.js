@@ -14,6 +14,14 @@ export default new Vuex.Store({
       'divide': '÷'
     },
     operation: 'plus',
+    left: {
+      n: 1,
+      d: 1
+    },
+    right: {
+      n: 1,
+      d: 1
+    },
     result: {
       n: 1,
       d: 1
@@ -30,36 +38,51 @@ export default new Vuex.Store({
     setResult (state, payload) {
       state.result = payload
     },
-    addToHistory (state, payload) {
-      state.history.push(payload)
+    setLeft (state, payload) {
+      state.left = payload
+    },
+    setRight (state, payload) {
+      state.right = payload
+    },
+    addToHistory (state) {
+      state.history.push({
+        left: Object.assign({}, state.left),
+        right: Object.assign({}, state.right),
+        operation: state.operation,
+        result: state.result
+      })
     },
     clearHistory (state) {
       state.history = []
     }
   },
   actions: {
-    calculate ({commit, state}, payload) {
-      const left = new Fraction(payload.left).valueOf()
-      const right = new Fraction(payload.right).valueOf()
+    calculate ({commit, state}, { left, right }) {
+      commit('setLeft', left)
+      commit('setRight', right)
+
+      const leftFloat = new Fraction(state.left).valueOf()
+      const rightFloat = new Fraction(state.right).valueOf()
+
       const operation = state.operation
       let result = 0
       switch (operation) {
         case 'plus':
-          result = left + right
+          result = leftFloat + rightFloat
           break
         case 'minus':
-          result = left - right
+          result = leftFloat - rightFloat
           break
         case 'multiply':
-          result = left * right
+          result = leftFloat * rightFloat
           break
         case 'divide':
-          result = left / right
+          result = leftFloat / rightFloat
           break
       }
       result = new Fraction(result)
       commit('setResult', result)
-      commit('addToHistory', { left: payload.left, right: payload.right, operation, result })
+      commit('addToHistory')
     }
   }
 })

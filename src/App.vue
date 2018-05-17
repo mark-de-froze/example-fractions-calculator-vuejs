@@ -68,6 +68,7 @@ body {
   margin: 0 auto;
 }
 .app-footer {
+  background-color: #fff;
   position: fixed;
   bottom: 0;
   left: 50%;

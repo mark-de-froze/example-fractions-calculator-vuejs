@@ -34,18 +34,18 @@ import {mapState, mapGetters} from 'vuex'
 
 export default {
   name: 'IndexPage',
-  data () {
-    return {
-      left: {
-        n: 1,
-        d: 2
-      },
-      right: {
-        n: 1,
-        d: 3
-      }
-    }
-  },
+  // data () {
+  //   return {
+  //     left: {
+  //       n: 1,
+  //       d: 2
+  //     },
+  //     right: {
+  //       n: 1,
+  //       d: 3
+  //     }
+  //   }
+  // },
   watch: {
     'left.n': 'onInput',
     'left.d': 'onInput',
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     ...mapGetters(['operation']),
-    ...mapState(['result', 'operations'])
+    ...mapState(['left', 'right', 'result', 'operations'])
   },
   methods: {
     onInput () {
