@@ -2,6 +2,15 @@
 
 > A Vue.js project
 
+
+## Demo
+https://fractions-calculator-vuejs.herokuapp.com/
+
+## Used
+* Vue, Vuex, Vue router
+* fraction.js
+
+
 ## Build Setup
 
 ``` bash
